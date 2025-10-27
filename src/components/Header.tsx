@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import shreeLogo from "@/assets/shree-logo.png";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,12 +15,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <header
@@ -30,7 +27,7 @@ const Header = () => {
     >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img src={shreeLogo} alt="Shree Mutual Fund Services" className="h-12 w-12" />
             <div>
               <h1 className="text-xl font-bold text-foreground leading-tight">
@@ -38,39 +35,46 @@ const Header = () => {
               </h1>
               <p className="text-xs text-muted-foreground">Chennai's Most Trusted</p>
             </div>
-          </div>
+          </Link>
 
           <div className="hidden md:flex items-center gap-6">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            <Link
+              to="/"
+              className={`text-sm font-medium transition-colors ${
+                isActive("/") ? "text-primary" : "text-foreground hover:text-primary"
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className={`text-sm font-medium transition-colors ${
+                isActive("/about") ? "text-primary" : "text-foreground hover:text-primary"
+              }`}
             >
               About Us
-            </button>
-            <button
-              onClick={() => scrollToSection("why-choose")}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Why Choose Us
-            </button>
-            <button
-              onClick={() => scrollToSection("calculators")}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            </Link>
+            <Link
+              to="/calculators"
+              className={`text-sm font-medium transition-colors ${
+                isActive("/calculators") ? "text-primary" : "text-foreground hover:text-primary"
+              }`}
             >
               Calculators
-            </button>
-            <button
-              onClick={() => scrollToSection("testimonials")}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            </Link>
+            <Link
+              to="/blog"
+              className={`text-sm font-medium transition-colors ${
+                isActive("/blog") ? "text-primary" : "text-foreground hover:text-primary"
+              }`}
             >
-              Testimonials
-            </button>
-            <Button
-              onClick={() => scrollToSection("contact")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow"
-            >
-              Contact Us
-            </Button>
+              Blog
+            </Link>
+            <Link to="/contact">
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow">
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
       </nav>
