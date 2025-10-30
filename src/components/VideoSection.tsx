@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const videos = [
-  "https://www.youtube.com/embed/SxP7ES8i3Q8",
-  "https://www.youtube.com/embed/_xDxxHOXZoc",
-  "https://www.youtube.com/embed/91Pn7_h9C5I",
+  { id: "dQw4w9WgXcQ" },
+  { id: "aBcDeFgHiJk" },
+  { id: "LmNoPqRsTuV" },
 ];
 
 export default function VideoSection() {
@@ -38,12 +38,12 @@ export default function VideoSection() {
 
           return (
             <motion.div
-              key={video}
+              key={video.id}
               className={`absolute rounded-2xl shadow-lg transition-all duration-700 ${transformClass}`}
               whileHover={{ scale: 1.05 }}
             >
               <iframe
-                src={`${video}?autoplay=1&mute=1&loop=1&playlist=${video.split("/").pop()}`}
+                src={`https://www.youtube.com/embed/${video.id}?autoplay=0&mute=1&loop=1&playlist=${video.id}`}
                 allow="autoplay; encrypted-media"
                 allowFullScreen
                 title={`testimonial-${index}`}
@@ -53,6 +53,13 @@ export default function VideoSection() {
                   height: isActive ? "270px" : "180px",
                   opacity: isActive ? 1 : 0.6,
                   transition: "all 0.7s ease",
+                  pointerEvents: isActive ? "auto" : "none",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}`;
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.src = `https://www.youtube.com/embed/${video.id}?autoplay=0&mute=1&loop=1&playlist=${video.id}`;
                 }}
               />
             </motion.div>
