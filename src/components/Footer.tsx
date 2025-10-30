@@ -28,15 +28,15 @@ const Footer = () => {
             <div className="space-y-3 text-background/70 text-sm">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span>123 Anna Salai, T. Nagar<br />Chennai - 600017, Tamil Nadu</span>
+                <span>4th Floor, A14, Thiru Vi Ka Industrial Estate,<br />Guindy, Chennai - 600032, Tamil Nadu</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 flex-shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 98848 91111</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 flex-shrink-0" />
-                <span>info@shreemutualfund.com</span>
+                <span>connect@shreemfs.com</span>
               </div>
             </div>
           </div>
@@ -45,8 +45,8 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-4">Compliance</h4>
             <div className="space-y-2 text-background/70 text-sm">
-              <p>SEBI Registered Mutual Fund Distributor</p>
-              <p>ARN: [Registration Number]</p>
+              <p> Shree Mutual Fund Services is an AMFI Registered Mutual Fund Distributor</p>
+              <p>ARN: 174093 </p>
               <p className="text-xs pt-4">
                 Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully before investing. Past performance is not indicative of future returns.
               </p>

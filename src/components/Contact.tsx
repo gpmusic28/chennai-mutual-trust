@@ -122,8 +122,8 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Visit Our Office</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    123 Anna Salai, T. Nagar<br />
-                    Chennai - 600017<br />
+                    A14, Thiru Vi Ka Industrial Estate, SIDCO <br />
+                    Guindy, Chennai - 600032<br />
                     Tamil Nadu, India
                   </p>
                 </div>
@@ -138,8 +138,7 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Call Us</h3>
                   <p className="text-muted-foreground">
-                    +91 98765 43210<br />
-                    +91 87654 32109
+                    +91 98848 91111<br />
                   </p>
                 </div>
               </div>
@@ -153,8 +152,7 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Email Us</h3>
                   <p className="text-muted-foreground">
-                    info@shreemutualfund.com<br />
-                    support@shreemutualfund.com
+                    connect@shreemfs.com<br />
                   </p>
                 </div>
               </div>
@@ -168,9 +166,8 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Business Hours</h3>
                   <p className="text-muted-foreground">
-                    Monday - Friday: 9:00 AM - 6:00 PM<br />
-                    Saturday: 9:00 AM - 2:00 PM<br />
-                    Sunday: Closed
+                    Monday - Friday: 9:30 AM - 6:30 PM<br />
+                    Saturday, Sunday: Closed<br />
                   </p>
                 </div>
               </div>
@@ -182,7 +179,7 @@ const Contact = () => {
         <div className="mt-16 max-w-6xl mx-auto">
           <Card className="overflow-hidden rounded-3xl border-0 shadow-2xl">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.8429602121746!2d80.23240431482152!3d13.047482090794765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267e4f5fffffff%3A0x72e5b0c9b0c5b0c9!2sT.%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1943.6920230347403!2d80.2085787388358!3d13.01119819682698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52677156976bed%3A0x3e25c2c424427f77!2sShree%20Mutual%20Fund%20Services!5e0!3m2!1sen!2sin!4v1761809399926!5m2!1sen!2sin"
               width="100%"
               height="400"
               style={{ border: 0 }}
