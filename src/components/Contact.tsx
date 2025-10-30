@@ -16,29 +16,30 @@ const Contact = () => {
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const response = await fetch("/.netlify/functions/sendEmail", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("/.netlify/functions/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    if (response.ok) {
-      toast.success("Thank you! We’ve received your message.");
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    } else {
-      toast.error("Something went wrong. Please try again.");
+      if (response.ok) {
+        toast.success("Thank you! We’ve received your message.");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Failed to send message. Try again later.");
+      console.error(error);
     }
-  } catch (error) {
-    toast.error("Failed to send message. Try again later.");
-    console.error(error);
-  }
-};
+  };
 
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
@@ -48,6 +49,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto px-4">
+        {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-6"></div>
@@ -56,6 +58,7 @@ const Contact = () => {
           </p>
         </div>
 
+        {/* Main Grid */}
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
           <Card className="p-8 border-0 shadow-2xl rounded-3xl bg-card">
@@ -131,6 +134,7 @@ const Contact = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
+            {/* Address */}
             <Card className="p-8 border-0 shadow-xl rounded-3xl hover:shadow-2xl transition-shadow bg-card">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -139,14 +143,22 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Visit Our Office</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    A14, Thiru Vi Ka Industrial Estate, SIDCO <br />
-                    Guindy, Chennai - 600032<br />
-                    Tamil Nadu, India
+                    <a
+                      href="https://share.google/IoIvU23n8jmYhd5pW"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      A14, Thiru Vi Ka Industrial Estate, SIDCO <br />
+                      Guindy, Chennai - 600032<br />
+                      Tamil Nadu, India
+                    </a>
                   </p>
                 </div>
               </div>
             </Card>
 
+            {/* Phone */}
             <Card className="p-8 border-0 shadow-xl rounded-3xl hover:shadow-2xl transition-shadow bg-card">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -155,12 +167,15 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Call Us</h3>
                   <p className="text-muted-foreground">
-                    +91 98848 91111<br />
+                    <a href="tel:+919884891111" className="hover:underline">
+                      +91 98848 91111
+                    </a>
                   </p>
                 </div>
               </div>
             </Card>
 
+            {/* Email */}
             <Card className="p-8 border-0 shadow-xl rounded-3xl hover:shadow-2xl transition-shadow bg-card">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -169,12 +184,15 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Email Us</h3>
                   <p className="text-muted-foreground">
-                    connect@shreemfs.com<br />
+                    <a href="mailto:connect@shreemfs.com" className="hover:underline">
+                      connect@shreemfs.com
+                    </a>
                   </p>
                 </div>
               </div>
             </Card>
 
+            {/* Business Hours */}
             <Card className="p-8 border-0 shadow-xl rounded-3xl hover:shadow-2xl transition-shadow bg-card">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center flex-shrink-0">
