@@ -1,41 +1,64 @@
-import { useRef } from "react";
+"use client";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-const VIDEOS = [
-  "https://www.youtube.com/embed/cI3YidsHVWc",
-  "https://www.youtube.com/embed/e4Tzh_MnO_s",
-  "https://www.youtube.com/embed/fZhJpqEGtSI"
+const videos = [
+  "https://www.youtube.com/embed/SxP7ES8i3Q8",
+  "https://www.youtube.com/embed/_xDxxHOXZoc",
+  "https://www.youtube.com/embed/91Pn7_h9C5I",
 ];
 
-const VideoSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+export default function VideoSection() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % videos.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="w-full bg-gray-50 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-        Our Client Experiences
+    <div className="relative flex flex-col items-center py-16 bg-gray-50 overflow-hidden">
+      <h2 className="text-3xl font-bold mb-10 text-gray-800">
+        Client Video Testimonials
       </h2>
 
-      <div
-        ref={containerRef}
-        className="flex overflow-x-auto space-x-6 px-4 md:px-12 snap-x snap-mandatory scrollbar-hide"
-      >
-        {VIDEOS.map((url, i) => (
-          <div
-            key={i}
-            className="snap-center flex-shrink-0 w-[90%] sm:w-[60%] md:w-[33%] rounded-2xl overflow-hidden shadow-lg transition-transform hover:scale-105 mx-auto"
-          >
-            <iframe
-              src={url + "?mute=1&enablejsapi=1"}
-              title={`Video ${i + 1}`}
-              className="w-full h-64 sm:h-80 md:h-[400px] rounded-2xl"
-              allow="autoplay; encrypted-media"
-              loading="lazy"
-            ></iframe>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
+      <div className="relative w-full flex justify-center items-center">
+        {videos.map((video, index) => {
+          const offset = (index - current + videos.length) % videos.length;
+          const isActive = offset === 0;
 
-export default VideoSection;
+          const transformClass =
+            offset === 0
+              ? "z-30 scale-100"
+              : offset === 1
+              ? "z-20 scale-75 -translate-x-40"
+              : "z-10 scale-75 translate-x-40";
+
+          return (
+            <motion.div
+              key={video}
+              className={`absolute rounded-2xl shadow-lg transition-all duration-700 ${transformClass}`}
+              whileHover={{ scale: 1.05 }}
+            >
+              <iframe
+                src={`${video}?autoplay=1&mute=1&loop=1&playlist=${video.split("/").pop()}`}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                title={`testimonial-${index}`}
+                className="rounded-2xl"
+                style={{
+                  width: isActive ? "480px" : "320px",
+                  height: isActive ? "270px" : "180px",
+                  opacity: isActive ? 1 : 0.6,
+                  transition: "all 0.7s ease",
+                }}
+              />
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
