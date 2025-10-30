@@ -266,6 +266,13 @@ const Testimonials = () => {
               </div>
 
               <div className="text-center mt-8">
+                 <Button
+    variant="outline"
+    className="rounded-full"
+    onClick={() => window.open("https://www.trustpilot.com/review/shreeconsultants.in", "_blank")}
+  >
+  
+  </Button>
                 <Button variant="outline" className="rounded-full">
                   View All Reviews on Trustpilot
                 </Button>
