@@ -1,325 +1,150 @@
-// src/components/ReviewsSection.tsx
-import React, { useEffect, useState } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+// ✅ Swiper imports (for latest version)
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Navigation, EffectFade } from "swiper";
+import { Autoplay, Navigation, EffectFade } from "swiper/modules";
+
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 
-SwiperCore.use([Autoplay, Navigation, EffectFade]);
-
-type Review = {
-  Name: string;
-  Platform: string; // "Google" or "Trustpilot" (case-insensitive)
-  Rating: string | number;
-  Review: string;
-  Date: string;
-};
-
-const SHEET_JSON_URL =
-  "https://script.google.com/macros/s/AKfycbxmez3MBANABWcUIilEA8jgQE2wKEhGcqXpSJUjNz327TJIVMLYKCcLYW6_4mQuFtyS/exec";
-
-const VIDEO_IDS = [
-  "cI3YidsHVWc",
-  "e4Tzh_MnO_s",
-  "fZhJpqEGtSI"
-];
-
-const truncate = (text: string, limit = 220) =>
-  text.length > limit ? text.slice(0, limit).trim() + "..." : text;
-
-export default function ReviewsSection() {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<{ review: Review | null; type?: "review" | "video" }>(
-    { review: null, type: "review" }
-  );
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+const ReviewsSection = () => {
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    let cancelled = false;
-    const fetchReviews = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(SHEET_JSON_URL);
-        const json = await res.json();
-        const raw = json.reviews || json; // tolerate different shapes
-        // normalize to Review[]
-        const parsed: Review[] = (raw || [])
-          .map((r: any) => ({
-            Name: r.Name || r.name || "",
-            Platform: (r.Platform || r.platform || "Google").trim(),
-            Rating: r.Rating || r.rating || 5,
-            Review: r.Review || r.review || "",
-            Date: r.Date || r.date || "",
-          }))
-          .filter((r: Review) => r.Name && r.Review);
-        if (!cancelled) setReviews(parsed);
-      } catch (err) {
-        console.error("Failed to fetch reviews", err);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    };
-    fetchReviews();
-
-    // optional: poll every 60s for updates (live-ish)
-    const interval = setInterval(fetchReviews, 60_000);
-    return () => {
-      cancelled = true;
-      clearInterval(interval);
-    };
+    // Replace this Google Apps Script URL with your live sheet endpoint
+    fetch("https://script.google.com/macros/s/AKfycbxmez3MBANABWcUIilEA8jgQE2wKEhGcqXpSJUjNz327TJIVMLYKCcLYW6_4mQuFtyS/exec")
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch((err) => console.error("Error fetching reviews:", err));
   }, []);
 
-  const openReviewModal = (r: Review) => {
-    setModalContent({ review: r, type: "review" });
-    setModalOpen(true);
-  };
-
-  const openVideoModal = (videoId: string) => {
-    setActiveVideo(videoId);
-    setModalContent({ review: null, type: "video" });
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    setModalContent({ review: null, type: "review" });
-    setActiveVideo(null);
-  };
+  const videos = [
+    { id: "cI3YidsHVWc", title: "Client Story: How SIP Built My Wealth" },
+    { id: "e4Tzh_MnO_s", title: "Retirement Success Journey" },
+    { id: "fZhJpqEGtSI", title: "From Beginner to Investor" },
+  ];
 
   return (
-    <section id="testimonials" className="py-20 bg-background">
+    <section id="reviews" className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        {/* Heading (match your style) */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-3">What Our Clients Say</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-4"></div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            What Our Clients Say
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-6"></div>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             See why families across Chennai trust Shree Mutual Fund Services
           </p>
         </div>
 
-        {/* Top: Video carousel */}
-        <div className="max-w-5xl mx-auto mb-10">
+        {/* 🎥 Video Testimonials */}
+        <div className="mb-20">
           <Swiper
             modules={[Autoplay, Navigation, EffectFade]}
-            spaceBetween={20}
-            slidesPerView={1}
-            navigation={false}
-            loop={true}
-            effect="fade"
-            autoplay={{ delay: 6000, disableOnInteraction: false }}
-            className="rounded-2xl overflow-hidden"
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            navigation
+            loop
+            spaceBetween={30}
+            className="max-w-5xl mx-auto"
           >
-            {VIDEO_IDS.map((id) => (
-              <SwiperSlide key={id}>
-                <div
-                  className="relative group cursor-pointer"
-                  onClick={() => openVideoModal(id)}
-                >
-                  {/* Use iframe muted autoplay/loop — YouTube requires playlist param for loop */}
-                  <div className="aspect-video w-full rounded-xl overflow-hidden shadow-lg">
+            {videos.map((video, index) => (
+              <SwiperSlide key={index}>
+                <Card className="overflow-hidden border-0 shadow-2xl rounded-3xl bg-gradient-to-br from-card to-secondary/30">
+                  <div className="relative aspect-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&controls=0&playlist=${id}`}
-                      title={`video-${id}`}
-                      allow="autoplay; encrypted-media; picture-in-picture"
-                      allowFullScreen
                       className="w-full h-full"
-                    />
+                      src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
                   </div>
-
-                  {/* Play overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                      <div className="bg-white/90 rounded-full p-4 shadow-lg">
-                        <Play className="w-8 h-8 text-primary" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  <CardContent className="p-6 text-center">
+                    <h4 className="font-bold text-xl">{video.title}</h4>
+                  </CardContent>
+                </Card>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        {/* Bottom: mixed reviews carousel */}
-        <div className="max-w-3xl mx-auto">
-          {loading && <div className="text-center text-muted-foreground">Loading reviews...</div>}
+        {/* 🌟 Reviews Section */}
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
+          loop
+          spaceBetween={20}
+          slidesPerView={1}
+          breakpoints={{
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="max-w-6xl mx-auto"
+        >
+          {reviews.map((review, index) => (
+            <SwiperSlide key={index}>
+              <Card className="p-8 border-0 shadow-xl hover:shadow-2xl transition-all rounded-3xl bg-card">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 className="font-bold text-lg">{review.Name}</h4>
+                    <p className="text-sm text-muted-foreground">{review.Date}</p>
+                  </div>
+                  <div className="flex gap-1">
+                    {[...Array(Number(review.Rating))].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          review.Platform === "Google"
+                            ? "fill-yellow-500 text-yellow-500"
+                            : "fill-green-500 text-green-500"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-muted-foreground line-clamp-4">
+                  {review.Review}
+                </p>
+                <p className="text-xs text-primary mt-4 font-semibold">
+                  {review.Platform}
+                </p>
+              </Card>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-          {!loading && reviews.length === 0 && (
-            <div className="text-center text-muted-foreground">No reviews yet.</div>
-          )}
-
-          {!loading && reviews.length > 0 && (
-            <div className="relative">
-              <Swiper
-                modules={[Autoplay, Navigation, EffectFade]}
-                spaceBetween={20}
-                slidesPerView={1}
-                loop={true}
-                autoplay={{ delay: 6000, disableOnInteraction: false }}
-                navigation={{
-                  nextEl: ".reviews-next",
-                  prevEl: ".reviews-prev",
-                } as any}
-                onSwiper={(swiper) => {
-                  // ensure navigation elements exist
-                }}
-                effect="fade"
-                className="rounded-xl"
-              >
-                {reviews.map((r, idx) => {
-                  const platform = (r.Platform || "").toLowerCase();
-                  const rating = Number(r.Rating) || 5;
-                  const isGoogle = platform.includes("google");
-                  const starColor = isGoogle ? "text-yellow-500" : "text-green-500";
-
-                  return (
-                    <SwiperSlide key={idx}>
-                      <Card className="p-6 border-0 shadow-lg rounded-2xl">
-                        <CardContent className="p-0">
-                          <div className="flex flex-col gap-4">
-                            <div className="flex items-start justify-between">
-                              <div>
-                                <h4 className="text-lg font-semibold">{r.Name}</h4>
-                                <p className="text-sm text-muted-foreground">{r.Date}</p>
-                              </div>
-
-                              <div className="flex items-center gap-2">
-                                <div className={`flex gap-1 ${starColor}`}>
-                                  {Array.from({ length: rating }).map((_, i) => (
-                                    <Star key={i} className="w-5 h-5 fill-current" />
-                                  ))}
-                                </div>
-                                {/* Platform label when Trustpilot (as requested show platform name) */}
-                                {!isGoogle && (
-                                  <span className="text-xs px-2 py-1 bg-green-50 text-green-600 rounded-full">
-                                    Trustpilot
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-
-                            <div
-                              className="text-foreground leading-relaxed relative"
-                              // clicking anywhere opens modal
-                              onClick={() => openReviewModal(r)}
-                              style={{ cursor: "pointer" }}
-                            >
-                              <p className="text-base">
-                                {truncate(r.Review, 280)}
-                              </p>
-
-                              {/* Fade overlay if long */}
-                              {r.Review && r.Review.length > 280 && (
-                                <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-white to-transparent pointer-events-none" />
-                              )}
-
-                              {r.Review && r.Review.length > 280 && (
-                                <div className="mt-2">
-                                  <button
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      openReviewModal(r);
-                                    }}
-                                    className="text-sm text-primary font-medium hover:underline"
-                                  >
-                                    Read more
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-
-              {/* Arrows */}
-              <button
-                className="reviews-prev absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-md hover:bg-white"
-                aria-label="Previous review"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                className="reviews-next absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-md hover:bg-white"
-                aria-label="Next review"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>
-          )}
+        {/* Navigation Arrows */}
+        <div className="flex justify-center gap-6 mt-10">
+          <Button
+            variant="outline"
+            size="icon"
+            className="swiper-button-prev rounded-full w-12 h-12 border-2 border-primary hover:bg-primary hover:text-white"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className="swiper-button-next rounded-full w-12 h-12 border-2 border-primary hover:bg-primary hover:text-white"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </Button>
         </div>
       </div>
-
-      {/* Modal (for both video and review) */}
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-          onClick={closeModal}
-        >
-          <div
-            className="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-4 flex justify-end">
-              <button onClick={closeModal} className="text-muted-foreground">Close</button>
-            </div>
-
-            {modalContent.type === "video" && activeVideo && (
-              <div className="w-full aspect-video">
-                <iframe
-                  className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1&mute=0`}
-                  title="video-player"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            )}
-
-            {modalContent.type === "review" && modalContent.review && (
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{modalContent.review.Name}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{modalContent.review.Date}</p>
-                <div className="mb-4 flex items-center gap-2">
-                  {(() => {
-                    const platform = (modalContent.review?.Platform || "").toLowerCase();
-                    const rating = Number(modalContent.review?.Rating) || 5;
-                    const isGoogle = platform.includes("google");
-                    const starClass = isGoogle ? "text-yellow-500" : "text-green-500";
-                    return (
-                      <>
-                        <div className={`flex gap-1 ${starClass}`}>
-                          {Array.from({ length: rating }).map((_, i) => (
-                            <Star key={i} className="w-5 h-5 fill-current" />
-                          ))}
-                        </div>
-                        {!isGoogle && (
-                          <span className="text-xs px-2 py-1 bg-green-50 text-green-600 rounded-full">
-                            Trustpilot
-                          </span>
-                        )}
-                      </>
-                    );
-                  })()}
-                </div>
-                <p className="text-foreground whitespace-pre-line">{modalContent.review.Review}</p>
-                <div className="mt-6 text-right">
-                  <button onClick={closeModal} className="px-4 py-2 bg-primary text-white rounded-lg">Close</button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </section>
   );
-}
+};
+
+export default ReviewsSection;
