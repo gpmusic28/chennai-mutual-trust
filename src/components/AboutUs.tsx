@@ -1,5 +1,5 @@
 import { Target, Award, Heart, TrendingUp } from "lucide-react";
-import { TextReveal } from "@/hooks/useScrollTextReveal";
+import { ColorRevealText } from "@/hooks/useScrollColorReveal";
 import { AnimatedSection } from "@/hooks/useScrollAnimation";
 
 const AboutUs = () => {
@@ -14,31 +14,29 @@ const AboutUs = () => {
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <AnimatedSection animation="slide-right" delay={100}>
-                <TextReveal 
-                  as="p"
-                  text="At Shree Mutual Fund Services, we are dedicated to empowering individuals and families in Chennai to achieve their financial goals through smart and strategic mutual fund investments."
-                  className="text-lg leading-relaxed"
-                />
-              </AnimatedSection>
+              <ColorRevealText 
+                as="p"
+                text="At Shree Mutual Fund Services, we are dedicated to empowering individuals and families in Chennai to achieve their financial goals through smart and strategic mutual fund investments."
+                className="text-lg leading-relaxed"
+              />
               
-              <AnimatedSection animation="slide-right" delay={200}>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  With over 15 years of experience in the financial services industry, we have built a reputation as Chennai's most trusted mutual fund distributor. Our team of expert advisors brings deep market knowledge, personalized service, and unwavering commitment to transparency.
-                </p>
-              </AnimatedSection>
+              <ColorRevealText 
+                as="p"
+                text="With over 15 years of experience in the financial services industry, we have built a reputation as Chennai's most trusted mutual fund distributor. Our team of expert advisors brings deep market knowledge, personalized service, and unwavering commitment to transparency."
+                className="text-lg leading-relaxed"
+              />
               
-              <AnimatedSection animation="slide-right" delay={300}>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  We believe that every investor's journey is unique. That's why we take the time to understand your financial aspirations, risk tolerance, and investment horizon to create customized SIP and lumpsum investment strategies that align perfectly with your goals.
-                </p>
-              </AnimatedSection>
+              <ColorRevealText 
+                as="p"
+                text="We believe that every investor's journey is unique. That's why we take the time to understand your financial aspirations, risk tolerance, and investment horizon to create customized SIP and lumpsum investment strategies that align perfectly with your goals."
+                className="text-lg leading-relaxed"
+              />
               
-              <AnimatedSection animation="slide-right" delay={400}>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Whether you're planning for your child's education, buying your dream home, building a retirement corpus, or simply growing your wealth, we're here to guide you every step of the way with trust, expertise, and care.
-                </p>
-              </AnimatedSection>
+              <ColorRevealText 
+                as="p"
+                text="Whether you're planning for your child's education, buying your dream home, building a retirement corpus, or simply growing your wealth, we're here to guide you every step of the way with trust, expertise, and care."
+                className="text-lg leading-relaxed"
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-6">

@@ -71,22 +71,20 @@ const Hero = () => {
           </AnimatedSection>
 
           {/* Trust Indicators */}
-          <AnimatedSection animation="fade" delay={600}>
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
-              <div className="text-center space-y-2 hover:scale-110 transition-transform duration-300">
-                <div className="text-3xl font-bold text-primary">15+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
-              </div>
-              <div className="text-center space-y-2 hover:scale-110 transition-transform duration-300">
-                <div className="text-3xl font-bold text-primary">5000+</div>
-                <div className="text-sm text-muted-foreground">Happy Clients</div>
-              </div>
-              <div className="text-center space-y-2 hover:scale-110 transition-transform duration-300">
-                <div className="text-3xl font-bold text-primary">₹500Cr+</div>
-                <div className="text-sm text-muted-foreground">AUM Managed</div>
-              </div>
+          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
+            <div className="text-center space-y-2">
+              <div className="text-3xl font-bold text-primary">15+</div>
+              <div className="text-sm text-muted-foreground">Years Experience</div>
             </div>
-          </AnimatedSection>
+            <div className="text-center space-y-2">
+              <div className="text-3xl font-bold text-primary">5000+</div>
+              <div className="text-sm text-muted-foreground">Happy Clients</div>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="text-3xl font-bold text-primary">₹500Cr+</div>
+              <div className="text-sm text-muted-foreground">AUM Managed</div>
+            </div>
+          </div>
         </div>
       </div>
 
