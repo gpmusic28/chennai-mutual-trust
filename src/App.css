@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+/* Hide swiper navigation arrows inside hero section only */
+.hero-section .swiper-button-next,
+.hero-section .swiper-button-prev {
+  display: none !important;
+}
