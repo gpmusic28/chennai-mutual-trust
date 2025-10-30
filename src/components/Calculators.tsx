@@ -3,8 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calculator, TrendingUp, Target, GraduationCap, Armchair, Heart, Diamond, ArrowUpCircle } from "lucide-react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import { Calculator, TrendingUp, Target, GraduationCap, Armchair, Heart, Diamond } from "lucide-react";
 
 const Calculators = () => {
   // SIP Calculator State
@@ -49,12 +48,6 @@ const Calculators = () => {
   const [marriageCost, setMarriageCost] = useState(1000000);
   const [marriageInflation, setMarriageInflation] = useState(7);
   const [marriageReturn, setMarriageReturn] = useState(12);
-
-  // Step-up SIP Calculator state
-  const [stepUpAmount, setStepUpAmount] = useState(5000);
-  const [stepUpPercent, setStepUpPercent] = useState(10);
-  const [stepUpRate, setStepUpRate] = useState(12);
-  const [stepUpYears, setStepUpYears] = useState(10);
 
   const calculateSIP = () => {
     const monthlyRate = sipRate / 12 / 100;
@@ -147,28 +140,6 @@ const Calculators = () => {
     };
   };
 
-  const calculateStepUpSIP = () => {
-    const monthlyRate = stepUpRate / 12 / 100;
-    const years = stepUpYears;
-    let totalInvestment = 0;
-    let futureValue = 0;
-    let currentSIP = stepUpAmount;
-
-    for (let year = 1; year <= years; year++) {
-      const monthsInYear = 12;
-      for (let month = 1; month <= monthsInYear; month++) {
-        totalInvestment += currentSIP;
-        const monthsRemaining = (years - year) * 12 + (12 - month);
-        futureValue += currentSIP * Math.pow(1 + monthlyRate, monthsRemaining);
-      }
-      // Increase SIP by step-up percentage for next year
-      currentSIP = currentSIP * (1 + stepUpPercent / 100);
-    }
-
-    const returns = futureValue - totalInvestment;
-    return { futureValue, invested: totalInvestment, returns };
-  };
-
   const sipResult = calculateSIP();
   const lumpResult = calculateLumpsum();
   const goalResult = calculateGoal();
@@ -176,7 +147,6 @@ const Calculators = () => {
   const retirementResult = calculateRetirement();
   const humanLifeValueResult = calculateHumanLifeValue();
   const marriagePlanningResult = calculateMarriagePlanning();
-  const stepUpResult = calculateStepUpSIP();
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-IN", {
@@ -184,54 +154,6 @@ const Calculators = () => {
       currency: "INR",
       maximumFractionDigits: 0,
     }).format(amount);
-  };
-
-  const CHART_COLORS = {
-    invested: "hsl(var(--muted))",
-    returns: "hsl(var(--primary))",
-  };
-
-  const PieChartComponent = ({ invested, returns }: { invested: number; returns: number }) => {
-    const data = [
-      { name: "Invested Amount", value: invested, color: CHART_COLORS.invested },
-      { name: "Est. Returns", value: returns, color: CHART_COLORS.returns },
-    ];
-
-    return (
-      <div className="w-full h-80 mt-6">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={100}
-              paddingAngle={2}
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Pie>
-            <Tooltip
-              formatter={(value: number) => formatCurrency(value)}
-              contentStyle={{
-                backgroundColor: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border))",
-                borderRadius: "8px",
-              }}
-            />
-            <Legend
-              verticalAlign="bottom"
-              height={36}
-              iconType="circle"
-              formatter={(value) => <span className="text-sm">{value}</span>}
-            />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-    );
   };
 
   return (
@@ -249,20 +171,13 @@ const Calculators = () => {
 
         <div className="max-w-5xl mx-auto">
           <Tabs defaultValue="sip" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 h-auto p-2 bg-card rounded-2xl shadow-lg gap-2">
+            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-7 h-auto p-2 bg-card rounded-2xl shadow-lg gap-2">
               <TabsTrigger
                 value="sip"
                 className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-xl py-3 text-sm font-semibold transition-all"
               >
                 <Calculator className="w-4 h-4 mr-1 lg:mr-2" />
                 SIP
-              </TabsTrigger>
-              <TabsTrigger
-                value="stepup"
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-xl py-3 text-sm font-semibold transition-all"
-              >
-                <ArrowUpCircle className="w-4 h-4 mr-1 lg:mr-2" />
-                Step-up
               </TabsTrigger>
               <TabsTrigger
                 value="lumpsum"
@@ -374,92 +289,6 @@ const Calculators = () => {
                           <span className="text-3xl font-bold text-primary">{formatCurrency(sipResult.futureValue)}</span>
                         </div>
                       </div>
-                      <PieChartComponent invested={sipResult.invested} returns={sipResult.returns} />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Step-up SIP Calculator */}
-            <TabsContent value="stepup" className="mt-8">
-              <Card className="border-0 shadow-2xl rounded-3xl overflow-hidden">
-                <CardHeader className="bg-gradient-to-r from-accent to-primary text-primary-foreground p-8">
-                  <CardTitle className="text-3xl">Step-up SIP Calculator</CardTitle>
-                  <CardDescription className="text-primary-foreground/90 text-base">
-                    Calculate returns with increasing monthly investments
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-8">
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div className="space-y-6">
-                      <div>
-                        <Label htmlFor="stepUpAmount" className="text-base font-semibold mb-3 block">
-                          Initial Monthly Investment
-                        </Label>
-                        <Input
-                          id="stepUpAmount"
-                          type="number"
-                          value={stepUpAmount}
-                          onChange={(e) => setStepUpAmount(Number(e.target.value))}
-                          className="h-12 text-lg rounded-xl"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="stepUpPercent" className="text-base font-semibold mb-3 block">
-                          Annual Step-up (%)
-                        </Label>
-                        <Input
-                          id="stepUpPercent"
-                          type="number"
-                          value={stepUpPercent}
-                          onChange={(e) => setStepUpPercent(Number(e.target.value))}
-                          className="h-12 text-lg rounded-xl"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="stepUpRate" className="text-base font-semibold mb-3 block">
-                          Expected Annual Return (%)
-                        </Label>
-                        <Input
-                          id="stepUpRate"
-                          type="number"
-                          value={stepUpRate}
-                          onChange={(e) => setStepUpRate(Number(e.target.value))}
-                          className="h-12 text-lg rounded-xl"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="stepUpYears" className="text-base font-semibold mb-3 block">
-                          Investment Period (Years)
-                        </Label>
-                        <Input
-                          id="stepUpYears"
-                          type="number"
-                          value={stepUpYears}
-                          onChange={(e) => setStepUpYears(Number(e.target.value))}
-                          className="h-12 text-lg rounded-xl"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="bg-gradient-to-br from-accent/5 to-primary/5 rounded-2xl p-8 space-y-6">
-                      <h3 className="text-2xl font-bold mb-6">Investment Summary</h3>
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-center pb-4 border-b border-border">
-                          <span className="text-muted-foreground">Total Investment</span>
-                          <span className="text-xl font-bold">{formatCurrency(stepUpResult.invested)}</span>
-                        </div>
-                        <div className="flex justify-between items-center pb-4 border-b border-border">
-                          <span className="text-muted-foreground">Expected Returns</span>
-                          <span className="text-xl font-bold text-green-600">{formatCurrency(stepUpResult.returns)}</span>
-                        </div>
-                        <div className="flex justify-between items-center pt-2">
-                          <span className="text-lg font-semibold">Maturity Value</span>
-                          <span className="text-3xl font-bold text-primary">{formatCurrency(stepUpResult.futureValue)}</span>
-                        </div>
-                      </div>
-                      <PieChartComponent invested={stepUpResult.invested} returns={stepUpResult.returns} />
                     </div>
                   </div>
                 </CardContent>
@@ -532,7 +361,6 @@ const Calculators = () => {
                           <span className="text-3xl font-bold text-primary">{formatCurrency(lumpResult.futureValue)}</span>
                         </div>
                       </div>
-                      <PieChartComponent invested={lumpResult.invested} returns={lumpResult.returns} />
                     </div>
                   </div>
                 </CardContent>
@@ -605,7 +433,6 @@ const Calculators = () => {
                           <span className="text-3xl font-bold text-primary">{formatCurrency(goalResult.monthlyInvestment)}</span>
                         </div>
                       </div>
-                      <PieChartComponent invested={goalResult.totalInvested} returns={goalAmount - goalResult.totalInvested} />
                     </div>
                   </div>
                 </CardContent>
@@ -706,7 +533,6 @@ const Calculators = () => {
                           <span className="text-3xl font-bold text-primary">{formatCurrency(childEducationResult.monthlySIP)}</span>
                         </div>
                       </div>
-                      <PieChartComponent invested={childEducationResult.totalInvestment} returns={childEducationResult.futureCost - childEducationResult.totalInvestment} />
                     </div>
                   </div>
                 </CardContent>
@@ -819,7 +645,6 @@ const Calculators = () => {
                           <span className="text-3xl font-bold text-primary">{formatCurrency(retirementResult.monthlySIP)}</span>
                         </div>
                       </div>
-                      <PieChartComponent invested={retirementResult.totalInvestment} returns={retirementResult.corpusNeeded - retirementResult.totalInvestment} />
                     </div>
                   </div>
                 </CardContent>
@@ -1007,7 +832,6 @@ const Calculators = () => {
                           <span className="text-3xl font-bold text-primary">{formatCurrency(marriagePlanningResult.monthlySIP)}</span>
                         </div>
                       </div>
-                      <PieChartComponent invested={marriagePlanningResult.totalInvestment} returns={marriagePlanningResult.expectedReturns} />
                     </div>
                   </div>
                 </CardContent>
