@@ -25,21 +25,21 @@ const Performance = () => {
   const stats = [
     {
       icon: Users,
-      end: 5000,
+      end: 5200,
       suffix: "+",
       label: "Clients Served",
       color: "from-primary to-accent",
     },
     {
       icon: TrendingUp,
-      end: 50000,
+      end: 11000,
       suffix: "+",
       label: "SIPs Managed",
       color: "from-accent to-primary",
     },
     {
       icon: Building,
-      end: 500,
+      end: 550,
       suffix: "Cr+",
       label: "Total AUM",
       prefix: "₹",
@@ -47,7 +47,7 @@ const Performance = () => {
     },
     {
       icon: Award,
-      end: 15,
+      end: 20,
       suffix: "+",
       label: "Years of Excellence",
       color: "from-accent to-primary",
