@@ -1,11 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import { motion } from "framer-motion";
+import YouTube from "react-youtube";
+import { useState, useEffect } from "react";
 
 const videos = [
-  { id: "dQw4w9WgXcQ" },
-  { id: "aBcDeFgHiJk" },
-  { id: "LmNoPqRsTuV" },
+  { id: "hY7m5jjJ9mM", title: "Investor Success Story 1" },
+  { id: "M7lc1UVf-VE", title: "Investor Success Story 2" },
+  { id: "ysz5S6PUM-U", title: "Investor Success Story 3" },
 ];
 
 export default function VideoSection() {
@@ -18,54 +20,55 @@ export default function VideoSection() {
     return () => clearInterval(interval);
   }, []);
 
+  const nextIndex = (index: number) => (index + 1) % videos.length;
+  const prevIndex = (index: number) =>
+    (index - 1 + videos.length) % videos.length;
+
   return (
-    <div className="relative flex flex-col items-center py-16 bg-gray-50 overflow-hidden">
-      <h2 className="text-3xl font-bold mb-10 text-gray-800">
-        Client Video Testimonials
-      </h2>
-
-      <div className="relative w-full flex justify-center items-center">
-        {videos.map((video, index) => {
-          const offset = (index - current + videos.length) % videos.length;
-          const isActive = offset === 0;
-
-          const transformClass =
-            offset === 0
-              ? "z-30 scale-100"
-              : offset === 1
-              ? "z-20 scale-75 -translate-x-40"
-              : "z-10 scale-75 translate-x-40";
-
-          return (
-            <motion.div
-              key={video.id}
-              className={`absolute rounded-2xl shadow-lg transition-all duration-700 ${transformClass}`}
-              whileHover={{ scale: 1.05 }}
-            >
-              <iframe
-                src={`https://www.youtube.com/embed/${video.id}?autoplay=0&mute=1&loop=1&playlist=${video.id}`}
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                title={`testimonial-${index}`}
-                className="rounded-2xl"
-                style={{
-                  width: isActive ? "480px" : "320px",
-                  height: isActive ? "270px" : "180px",
-                  opacity: isActive ? 1 : 0.6,
-                  transition: "all 0.7s ease",
-                  pointerEvents: isActive ? "auto" : "none",
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.src = `https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}`;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.src = `https://www.youtube.com/embed/${video.id}?autoplay=0&mute=1&loop=1&playlist=${video.id}`;
-                }}
-              />
-            </motion.div>
-          );
-        })}
+    <section className="py-20 bg-gradient-to-b from-orange-50 to-white overflow-hidden">
+      <div className="max-w-6xl mx-auto text-center mb-10">
+        <h2 className="text-4xl font-bold text-gray-900">
+          🎬 Real Investor Stories
+        </h2>
+        <p className="text-gray-600 mt-2">
+          Watch what our happy investors have to say about Shree Mutual Fund
+          Services
+        </p>
       </div>
-    </div>
+
+      <div className="relative flex justify-center items-center">
+        {/* Back Left */}
+        <motion.div
+          className="absolute w-64 sm:w-80 opacity-50 scale-75"
+          initial={{ x: -200, opacity: 0 }}
+          animate={{ x: -150, opacity: 0.5 }}
+          transition={{ duration: 0.8 }}
+        >
+          <YouTube videoId={videos[prevIndex(current)].id} opts={{ width: "100%", height: "180" }} />
+        </motion.div>
+
+        {/* Center Main */}
+        <motion.div
+          className="z-10 w-80 sm:w-[420px] shadow-xl rounded-2xl overflow-hidden border-4 border-orange-400"
+          key={videos[current].id}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <YouTube videoId={videos[current].id} opts={{ width: "100%", height: "230" }} />
+        </motion.div>
+
+        {/* Back Right */}
+        <motion.div
+          className="absolute w-64 sm:w-80 opacity-50 scale-75"
+          initial={{ x: 200, opacity: 0 }}
+          animate={{ x: 150, opacity: 0.5 }}
+          transition={{ duration: 0.8 }}
+        >
+          <YouTube videoId={videos[nextIndex(current)].id} opts={{ width: "100%", height: "180" }} />
+        </motion.div>
+      </div>
+    </section>
   );
 }

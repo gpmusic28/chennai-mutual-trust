@@ -9,7 +9,7 @@ interface Review {
 }
 
 const SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbxGd3-WjzevaEbIu5LHwxxaVX9fVx9m4HH14HDhzZIK5T-q0FF4UoNnPon4FdNBJxCa/exec";
+  "https://script.google.com/macros/s/AKfycbyi0U-gsTCvGrfMOjqEFxWMxjiuCVWhZdS_kW2mVNwOgCjpvDjYDISry3RcTto-p8Zk/exec";
 
 const ReviewsSection = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
