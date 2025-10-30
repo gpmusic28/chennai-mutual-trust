@@ -1,4 +1,5 @@
 import { Shield, Users, FileCheck, MapPin } from "lucide-react";
+import { ColorRevealText } from "@/hooks/useScrollColorReveal";
 
 const WhyChoose = () => {
   const features = [
@@ -64,8 +65,8 @@ const WhyChoose = () => {
                 <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
+                <p className="leading-relaxed">
+                  <ColorRevealText text={feature.description} />
                 </p>
               </div>
             </div>

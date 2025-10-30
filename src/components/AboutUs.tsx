@@ -1,4 +1,5 @@
 import { Target, Award, Heart, TrendingUp } from "lucide-react";
+import { ColorRevealText } from "@/hooks/useScrollColorReveal";
 
 const AboutUs = () => {
   return (
@@ -12,17 +13,17 @@ const AboutUs = () => {
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
-              <p className="text-lg text-foreground leading-relaxed">
-                At <span className="font-semibold text-primary">Shree Mutual Fund Services</span>, we are dedicated to empowering individuals and families in Chennai to achieve their financial goals through smart and strategic mutual fund investments.
+              <p className="text-lg leading-relaxed">
+                <ColorRevealText text="At Shree Mutual Fund Services, we are dedicated to empowering individuals and families in Chennai to achieve their financial goals through smart and strategic mutual fund investments." className="text-foreground" />
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                With over 15 years of experience in the financial services industry, we have built a reputation as Chennai's most trusted mutual fund distributor. Our team of expert advisors brings deep market knowledge, personalized service, and unwavering commitment to transparency.
+              <p className="text-lg leading-relaxed">
+                <ColorRevealText text="With over 15 years of experience in the financial services industry, we have built a reputation as Chennai's most trusted mutual fund distributor. Our team of expert advisors brings deep market knowledge, personalized service, and unwavering commitment to transparency." />
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe that every investor's journey is unique. That's why we take the time to understand your financial aspirations, risk tolerance, and investment horizon to create customized SIP and lumpsum investment strategies that align perfectly with your goals.
+              <p className="text-lg leading-relaxed">
+                <ColorRevealText text="We believe that every investor's journey is unique. That's why we take the time to understand your financial aspirations, risk tolerance, and investment horizon to create customized SIP and lumpsum investment strategies that align perfectly with your goals." />
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Whether you're planning for your child's education, buying your dream home, building a retirement corpus, or simply growing your wealth, we're here to guide you every step of the way with trust, expertise, and care.
+              <p className="text-lg leading-relaxed">
+                <ColorRevealText text="Whether you're planning for your child's education, buying your dream home, building a retirement corpus, or simply growing your wealth, we're here to guide you every step of the way with trust, expertise, and care." />
               </p>
             </div>
 
