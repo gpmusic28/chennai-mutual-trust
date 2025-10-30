@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { Users, TrendingUp, Award, Building } from "lucide-react";
-import { TextReveal } from "@/hooks/useScrollTextReveal";
 
 const Performance = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -99,17 +98,15 @@ const Performance = () => {
     <section ref={sectionRef} className="py-24 bg-gradient-to-br from-primary to-accent relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+        <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <TextReveal
-            as="h2"
-            text="Our Track Record"
-            className="text-4xl md:text-5xl font-bold mb-4 text-white"
-          />
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+            Our Track Record
+          </h2>
           <div className="w-24 h-1 bg-white mx-auto mb-6"></div>
           <p className="text-xl text-white/90 max-w-2xl mx-auto">
             Numbers that reflect our commitment to your financial success
@@ -120,7 +117,7 @@ const Performance = () => {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 text-center hover:bg-white/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:scale-105 animate-fade-in"
+              className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 text-center hover:bg-white/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className={`w-20 h-20 bg-gradient-to-br ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl`}>
