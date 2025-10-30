@@ -142,8 +142,30 @@ All colors MUST be HSL.
     }
   }
 }
-/* Hide swiper navigation arrows inside hero section only */
+/* === Fix for Hero Section Arrow Issue === */
 .hero-section .swiper-button-next,
 .hero-section .swiper-button-prev {
   display: none !important;
+}
+
+/* === Spacing between Hero and Reviews Section === */
+section#reviews {
+  margin-top: 6rem; /* adjust spacing as needed */
+}
+
+/* === Optional: smooth fade-in for the review section === */
+#reviews {
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
