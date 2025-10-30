@@ -1,37 +1,35 @@
-import React, { useState } from "react";
+import { useRef } from "react";
 
-const videos = [
-  { id: 1, url: "https://www.youtube.com/embed/cI3YidsHVWc" },
-  { id: 2, url: "https://www.youtube.com/embed/e4Tzh_MnO_s" },
-  { id: 3, url: "https://www.youtube.com/embed/fZhJpqEGtSI" },
+const VIDEOS = [
+  "https://www.youtube.com/embed/cI3YidsHVWc",
+  "https://www.youtube.com/embed/e4Tzh_MnO_s",
+  "https://www.youtube.com/embed/fZhJpqEGtSI"
 ];
 
 const VideoSection = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="py-16 bg-white text-center">
-      <h2 className="text-3xl font-bold mb-8 text-orange-600">
-        Our Clients Speak
+    <section className="w-full bg-gray-50 py-12">
+      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+        Our Client Experiences
       </h2>
-      <div className="flex justify-center gap-6 overflow-x-auto px-4">
-        {videos.map((video) => (
+
+      <div
+        ref={containerRef}
+        className="flex overflow-x-auto space-x-6 px-4 md:px-12 snap-x snap-mandatory scrollbar-hide"
+      >
+        {VIDEOS.map((url, i) => (
           <div
-            key={video.id}
-            className={`relative flex-shrink-0 w-[300px] h-[180px] rounded-xl overflow-hidden transition-transform duration-300 ${
-              hovered === video.id ? "scale-105" : "scale-95 opacity-70"
-            }`}
-            onMouseEnter={() => setHovered(video.id)}
-            onMouseLeave={() => setHovered(null)}
+            key={i}
+            className="snap-center flex-shrink-0 w-[90%] sm:w-[60%] md:w-[33%] rounded-2xl overflow-hidden shadow-lg transition-transform hover:scale-105 mx-auto"
           >
             <iframe
-              width="300"
-              height="180"
-              src={`${video.url}?autoplay=${hovered === video.id ? 1 : 0
-                }&mute=1&controls=0&loop=1`}
-              title={`video-${video.id}`}
+              src={url + "?mute=1&enablejsapi=1"}
+              title={`Video ${i + 1}`}
+              className="w-full h-64 sm:h-80 md:h-[400px] rounded-2xl"
               allow="autoplay; encrypted-media"
-              className="rounded-xl"
+              loading="lazy"
             ></iframe>
           </div>
         ))}
