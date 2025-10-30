@@ -1,4 +1,6 @@
 import { Shield, Users, FileCheck, MapPin } from "lucide-react";
+import { AnimatedSection } from "@/hooks/useScrollAnimation";
+import { TextReveal } from "@/hooks/useScrollTextReveal";
 
 const WhyChoose = () => {
   const features = [
@@ -31,44 +33,48 @@ const WhyChoose = () => {
   return (
     <section id="why-choose" className="py-24 bg-gradient-to-b from-background to-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Why Choose Shree Mutual Fund Services?
-          </h2>
+        <AnimatedSection animation="fade" className="text-center mb-16">
+          <TextReveal
+            as="h2"
+            text="Why Choose Shree Mutual Fund Services?"
+            className="text-4xl md:text-5xl font-bold mb-4"
+          />
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mb-6"></div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Experience the difference of working with Chennai's most trusted mutual fund partners
           </p>
-        </div>
+        </AnimatedSection>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
-            <div
+            <AnimatedSection
               key={index}
-              className="group relative bg-card rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              animation="scale"
+              delay={index * 100}
             >
-              {/* Gradient Background on Hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`}></div>
-              
-              {/* Glow Effect */}
-              <div className="absolute -inset-0.5 bg-gradient-to-br from-primary to-accent rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
-              
-              <div className="relative z-10">
-                {/* Icon */}
-                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-lg`}>
-                  <feature.icon className="w-8 h-8 text-white" />
-                </div>
+              <div className="group relative bg-card rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3">
+                {/* Gradient Background on Hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`}></div>
+                
+                {/* Glow Effect */}
+                <div className="absolute -inset-0.5 bg-gradient-to-br from-primary to-accent rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 shadow-lg`}>
+                    <feature.icon className="w-8 h-8 text-white" />
+                  </div>
 
-                {/* Content */}
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
+                  {/* Content */}
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

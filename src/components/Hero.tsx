@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingUp, Shield, Users } from "lucide-react";
+import { TextReveal } from "@/hooks/useScrollTextReveal";
+import { AnimatedSection } from "@/hooks/useScrollAnimation";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -26,42 +28,47 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 py-32 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-          <div className="inline-block">
-            <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold">
-              Chennai's Most Trusted
-            </span>
-          </div>
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+          <AnimatedSection animation="fade" delay={0}>
+            <div className="inline-block">
+              <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold">
+                Chennai's Most Trusted
+              </span>
+            </div>
+          </AnimatedSection>
 
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            Chennai's Most Trusted{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Mutual Fund Distributor
-            </span>
-          </h1>
+          <TextReveal 
+            as="h1"
+            text="Chennai's Most Trusted Mutual Fund Distributor"
+            className="text-5xl md:text-7xl font-bold leading-tight"
+          />
 
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Your journey to smarter investing starts with trust and transparency.
-          </p>
+          <AnimatedSection animation="slide-up" delay={200}>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Your journey to smarter investing starts with trust and transparency.
+            </p>
+          </AnimatedSection>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button
-              size="lg"
-              onClick={() => scrollToSection("contact")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 rounded-full shadow-glow hover:shadow-2xl hover:scale-105 transition-all duration-300"
-            >
-              Start Your SIP
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => scrollToSection("calculators")}
-              className="text-lg px-8 py-6 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-            >
-              Explore Calculators
-            </Button>
-          </div>
+          <AnimatedSection animation="scale" delay={400}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+              <Button
+                size="lg"
+                onClick={() => scrollToSection("contact")}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 rounded-full shadow-glow hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              >
+                Start Your SIP
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => scrollToSection("calculators")}
+                className="text-lg px-8 py-6 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                Explore Calculators
+              </Button>
+            </div>
+          </AnimatedSection>
 
           {/* Trust Indicators */}
           <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
