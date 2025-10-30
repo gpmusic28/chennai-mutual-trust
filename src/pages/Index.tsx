@@ -9,7 +9,6 @@ import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import ReviewsSection from "@/components/ReviewsSection";
 
 const Index = () => {
   return (
@@ -21,10 +20,9 @@ const Index = () => {
       <WhyChoose />
       <Calculators />
       <Performance />
-      <Testimonials />
+      <Testimonials /> {/* ✅ Keep only one review section */}
       <CTA />
       <Contact />
-      <ReviewsSection />
       <Footer />
     </div>
   );
