@@ -40,17 +40,17 @@ const Testimonials = () => {
 
   const videoTestimonials = [
     {
-      id: "dQw4w9WgXcQ",
+      id: "cI3YidsHVWc",
       title: "Success Story: Building Wealth Through SIP",
       author: "Ramesh Kumar",
     },
     {
-      id: "dQw4w9WgXcQ",
+      id: "e4Tzh_MnO_s",
       title: "How I Achieved My Retirement Goals",
       author: "Lakshmi Narayanan",
     },
     {
-      id: "dQw4w9WgXcQ",
+      id: "fZhJpqEGtSI",
       title: "From Zero to 10 Lakhs: My SIP Journey",
       author: "Arun Prakash",
     },
