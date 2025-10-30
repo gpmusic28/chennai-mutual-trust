@@ -28,7 +28,7 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src={shreeLogo} alt="Shree Mutual Fund Services" className="h-12 w-12" />
+            <img src={shreeLogo} alt="Shree Mutual Fund Services" className="h-12 w-14" />
             <div>
               <h1 className="text-xl font-bold text-foreground leading-tight">
                 Shree Mutual Fund Services
