@@ -66,15 +66,15 @@ const Hero = () => {
           {/* Trust Indicators */}
           <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12">
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-primary">15+</div>
+              <div className="text-3xl font-bold text-primary">20+</div>
               <div className="text-sm text-muted-foreground">Years Experience</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-primary">5000+</div>
+              <div className="text-3xl font-bold text-primary">5200+</div>
               <div className="text-sm text-muted-foreground">Happy Clients</div>
             </div>
             <div className="text-center space-y-2">
-              <div className="text-3xl font-bold text-primary">₹500Cr+</div>
+              <div className="text-3xl font-bold text-primary">₹550Cr+</div>
               <div className="text-sm text-muted-foreground">AUM Managed</div>
             </div>
           </div>
@@ -85,5 +85,12 @@ const Hero = () => {
     </section>
   );
 };
+{/* Mouse Scroll Indicator */}
+<div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center animate-fade-in">
+  <div className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-1">
+    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+  </div>
+  <p className="text-sm text-muted-foreground mt-2 animate-pulse">Scroll Down</p>
+</div>
 
 export default Hero;
