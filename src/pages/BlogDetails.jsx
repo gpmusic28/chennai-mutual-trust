@@ -5,14 +5,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { fetchBlogs } from "@/components/ui/fetchBlogs";
+import { fetchBlog } from "@/components/ui/fetchBlog";
 
 const BlogDetails = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    fetchBlogs().then((data) => {
+    fetchBlog().then((data) => {
       const found = data.find((item) => item.ID === id || item.ID === Number(id));
       setPost(found);
     });
@@ -30,9 +30,9 @@ const BlogDetails = () => {
       <Header />
 
       <div className="container mx-auto px-4 py-24">
-        <Link to="/blogs">
+        <Link to="/">
           <Button variant="ghost" className="mb-6 flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> Back to Blogs
+            <ArrowLeft className="w-4 h-4" /> Back to Blog
           </Button>
         </Link>
 
