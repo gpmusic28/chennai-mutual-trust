@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, ChevronLeft, ChevronRight, Quote, Play } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -93,6 +93,14 @@ const Testimonials = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Load Trustpilot widget script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <section id="testimonials" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -126,17 +134,14 @@ const Testimonials = () => {
                       <Card className="border-0 shadow-2xl rounded-3xl overflow-hidden bg-gradient-to-br from-card to-secondary/30">
                         <CardContent className="p-12">
                           <Quote className="w-16 h-16 text-primary/20 mb-6" />
-                          
                           <div className="flex mb-6">
                             {[...Array(testimonial.rating)].map((_, i) => (
                               <Star key={i} className="w-6 h-6 fill-primary text-primary" />
                             ))}
                           </div>
-
                           <p className="text-xl text-foreground leading-relaxed mb-8 italic">
                             "{testimonial.text}"
                           </p>
-
                           <div className="flex items-center justify-between border-t border-border pt-6">
                             <div>
                               <h4 className="text-xl font-bold text-foreground mb-1">
@@ -199,7 +204,10 @@ const Testimonials = () => {
           <TabsContent value="video">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {videoTestimonials.map((video, index) => (
-                <Card key={index} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border-0">
+                <Card
+                  key={index}
+                  className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border-0"
+                >
                   <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-accent/20">
                     <iframe
                       className="w-full h-full"
@@ -224,62 +232,37 @@ const Testimonials = () => {
           <TabsContent value="trustpilot">
             <div className="max-w-4xl mx-auto">
               <div className="flex justify-center mb-12">
-  <div
-    className="trustpilot-widget"
-    data-locale="en-US"
-    data-template-id="5419b6a8b0d04a076446a9ad"
-    data-businessunit-id="YOUR_BUSINESS_UNIT_ID"
-    data-style-height="24px"
-    data-style-width="100%"
-    data-theme="light"
-  >
-    <a
-      href="https://www.trustpilot.com/review/shreeconsultants.in"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Trustpilot
-    </a>
-  </div>
-</div>
-
-
-              <div className="grid gap-6">
-                {trustpilotReviews.map((review, index) => (
-                  <Card key={index} className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300">
-                    <CardContent className="p-8">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <div className="flex items-center gap-2 mb-2">
-                            <h4 className="font-bold text-lg">{review.name}</h4>
-                            {review.verified && (
-                              <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
-                                Verified
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm text-muted-foreground">{review.date}</p>
-                        </div>
-                        <div className="flex gap-1">
-  {[...Array(review.rating)].map((_, i) => (
-    <Star key={i} className="w-5 h-5" style={{ color: "#00B67A", fill: "#00B67A" }} />
-  ))}
-</div>
-
-                      </div>
-                      <p className="text-foreground leading-relaxed">{review.text}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+                <div
+                  className="trustpilot-widget"
+                  data-locale="en-US"
+                  data-template-id="56278e9abfbbba0bdcd568bc"
+                  data-businessunit-id="66b34e14d88824e92544ce18"
+                  data-style-height="240px"
+                  data-style-width="100%"
+                  data-theme="light"
+                  data-token="7da60a13-d844-4715-b072-2d82c93a8ecc"
+                >
+                  <a
+                    href="https://www.trustpilot.com/review/shreeconsultants.in"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Trustpilot
+                  </a>
+                </div>
               </div>
 
               <div className="text-center mt-8">
-                 <Button
-    variant="outline"
-    className="rounded-full"
-    onClick={() => window.open("https://www.trustpilot.com/review/shreeconsultants.in", "_blank")}
-    >
-
+                <Button
+                  variant="outline"
+                  className="rounded-full"
+                  onClick={() =>
+                    window.open(
+                      "https://www.trustpilot.com/review/shreeconsultants.in",
+                      "_blank"
+                    )
+                  }
+                >
                   View All Reviews on Trustpilot
                 </Button>
               </div>
