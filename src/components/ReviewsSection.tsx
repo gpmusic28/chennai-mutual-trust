@@ -234,7 +234,6 @@ const Testimonials = () => {
                     <Star key={i} className="w-6 h-6 fill-primary text-primary" />
                   ))}
                 </div>
-                <span className="text-lg font-semibold">4.9 out of 5</span>
               </div>
 
               <div className="grid gap-6">

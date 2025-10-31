@@ -6,7 +6,7 @@ const WhyChoose = () => {
     {
       icon: Shield,
       title: "Trusted Since 2004",
-      description: "Over 15 years of building trust with Chennai families through transparent and ethical practices.",
+      description: "Over 20+ years of building trust with Chennai families through transparent and ethical practices.",
       color: "from-primary to-accent",
     },
     {
