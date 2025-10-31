@@ -6,8 +6,5 @@
     "javascript": "javascriptreact",
     "typescript": "typescriptreact"
   }
-  {
-  "css.lint.unknownAtRules": "ignore"
-}
-
+  
 }

@@ -41,18 +41,18 @@ const Testimonials = () => {
   const videoTestimonials = [
     {
       id: "cI3YidsHVWc",
-      title: "Success Story: Building Wealth Through SIP",
-      author: "Ramesh Kumar",
+      title: "Shree Consultants Gave Me A Peace Of Mind With My Finances",
+      author: "Dr Jayant",
     },
     {
       id: "e4Tzh_MnO_s",
-      title: "How I Achieved My Retirement Goals",
-      author: "Lakshmi Narayanan",
+      title: "My Shree Consultants Portfolio Helped Fund My Son's Wedding!",
+      author: "Dr. Murali Krishnaswamy",
     },
     {
       id: "fZhJpqEGtSI",
-      title: "From Zero to 10 Lakhs: My SIP Journey",
-      author: "Arun Prakash",
+      title: "I Have Made The Right Decision To Choose Shree Consultants",
+      author: "Sridharan Sankaran",
     },
   ];
 
