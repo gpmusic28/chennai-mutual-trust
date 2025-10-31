@@ -18,7 +18,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-background/70 text-sm leading-relaxed">
-              Your journey to smarter investing starts with trust and transparency. Building financial futures since 2009.
+              Your journey to smarter investing starts with trust and transparency. Building financial futures since 2004.
             </p>
           </div>
 
