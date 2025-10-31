@@ -91,7 +91,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+{/* Scroll Indicator */}
       <div
         onClick={() => scrollToSection("about")}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce cursor-pointer"
