@@ -230,10 +230,11 @@ const Testimonials = () => {
                   className="h-8 invert dark:invert-0"
                 />
                 <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-6 h-6 fill-primary text-primary" />
-                  ))}
-                </div>
+  {[...Array(5)].map((_, i) => (
+    <Star key={i} className="w-6 h-6" style={{ color: "#00B67A", fill: "#00B67A" }} />
+  ))}
+</div>
+
                 <span className="text-lg font-semibold">4.9 out of 5</span>
               </div>
 
