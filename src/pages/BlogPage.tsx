@@ -5,14 +5,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { fetchBlogs } from "@/components/ui/fetchBlogs";
+import { fetchBlog } from "@/components/ui/fetchBlogs";
 import { Link } from "react-router-dom";
 
 const BlogPage = () => {
   const [blogPosts, setBlogPosts] = useState([]);
 
   useEffect(() => {
-    fetchBlogs().then((data) => {
+    fetchBlog().then((data) => {
       const formatted = data.map((row) => ({
         id: row.ID,
         title: row.Title,
