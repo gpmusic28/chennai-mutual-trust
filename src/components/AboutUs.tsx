@@ -17,7 +17,7 @@ const AboutUs = () => {
                 <ColorRevealText text="At Shree Mutual Fund Services, we are dedicated to empowering individuals and families in Chennai to achieve their financial goals through smart and strategic mutual fund investments." className="text-foreground" />
               </p>
               <p className="text-lg leading-relaxed">
-                <ColorRevealText text="With over 15 years of experience in the financial services industry, we have built a reputation as Chennai's most trusted mutual fund distributor. Our team of expert advisors brings deep market knowledge, personalized service, and unwavering commitment to transparency." />
+                <ColorRevealText text="With over 20+ years of experience in the financial services industry, we have built a reputation as Chennai's most trusted mutual fund distributor. Our team of expert advisors brings deep market knowledge, personalized service, and unwavering commitment to transparency." />
               </p>
               <p className="text-lg leading-relaxed">
                 <ColorRevealText text="We believe that every investor's journey is unique. That's why we take the time to understand your financial aspirations, risk tolerance, and investment horizon to create customized SIP and lumpsum investment strategies that align perfectly with your goals." />
