@@ -14,17 +14,27 @@ const Hero = () => {
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
+        <div
+          className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float"
+          style={{ animationDelay: "2s" }}
+        ></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
       </div>
 
       {/* Floating Icons */}
       <div className="absolute inset-0 pointer-events-none">
         <TrendingUp className="absolute top-32 left-[15%] w-8 h-8 text-primary/20 animate-float" />
-        <Shield className="absolute top-48 right-[20%] w-10 h-10 text-accent/20 animate-float" style={{ animationDelay: "1s" }} />
-        <Users className="absolute bottom-32 left-[25%] w-9 h-9 text-primary/20 animate-float" style={{ animationDelay: "3s" }} />
+        <Shield
+          className="absolute top-48 right-[20%] w-10 h-10 text-accent/20 animate-float"
+          style={{ animationDelay: "1s" }}
+        />
+        <Users
+          className="absolute bottom-32 left-[25%] w-9 h-9 text-primary/20 animate-float"
+          style={{ animationDelay: "3s" }}
+        />
       </div>
 
+      {/* Main Hero Content */}
       <div className="container mx-auto px-4 py-32 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <div className="inline-block">
@@ -81,16 +91,17 @@ const Hero = () => {
         </div>
       </div>
 
-  
+      {/* Scroll Indicator */}
+      <div
+        onClick={() => scrollToSection("about")}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce cursor-pointer"
+      >
+        <div className="w-7 h-12 border-2 border-orange-500 rounded-full flex justify-center items-start p-1">
+          <div className="w-1.5 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+        </div>
+      </div>
     </section>
   );
 };
-{/* Scroll Indicator */}
-<div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
-  <div className="w-7 h-12 border-2 border-orange-500 rounded-full flex justify-center items-start p-1">
-    <div className="w-1.5 h-3 bg-orange-500 rounded-full animate-pulse"></div>
-  </div>
-</div>
-
 
 export default Hero;
