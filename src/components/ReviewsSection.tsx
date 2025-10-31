@@ -223,20 +223,26 @@ const Testimonials = () => {
           {/* Trustpilot Reviews */}
           <TabsContent value="trustpilot">
             <div className="max-w-4xl mx-auto">
-              <div className="flex items-center justify-center gap-4 mb-12">
-                <img 
-                  src="https://cdn.trustpilot.net/brand-assets/4.1.0/logo-white.svg" 
-                  alt="Trustpilot" 
-                  className="h-8 invert dark:invert-0"
-                />
-                <div className="flex gap-1">
-  {[...Array(5)].map((_, i) => (
-    <Star key={i} className="w-6 h-6" style={{ color: "#00B67A", fill: "#00B67A" }} />
-  ))}
+              <div className="flex justify-center mb-12">
+  <div
+    className="trustpilot-widget"
+    data-locale="en-US"
+    data-template-id="5419b6a8b0d04a076446a9ad"
+    data-businessunit-id="YOUR_BUSINESS_UNIT_ID"
+    data-style-height="24px"
+    data-style-width="100%"
+    data-theme="light"
+  >
+    <a
+      href="https://www.trustpilot.com/review/shreeconsultants.in"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Trustpilot
+    </a>
+  </div>
 </div>
 
-                <span className="text-lg font-semibold">4.9 out of 5</span>
-              </div>
 
               <div className="grid gap-6">
                 {trustpilotReviews.map((review, index) => (
@@ -255,10 +261,11 @@ const Testimonials = () => {
                           <p className="text-sm text-muted-foreground">{review.date}</p>
                         </div>
                         <div className="flex gap-1">
-                          {[...Array(review.rating)].map((_, i) => (
-                            <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                          ))}
-                        </div>
+  {[...Array(review.rating)].map((_, i) => (
+    <Star key={i} className="w-5 h-5" style={{ color: "#00B67A", fill: "#00B67A" }} />
+  ))}
+</div>
+
                       </div>
                       <p className="text-foreground leading-relaxed">{review.text}</p>
                     </CardContent>
