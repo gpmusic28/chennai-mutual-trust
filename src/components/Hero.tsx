@@ -85,12 +85,12 @@ const Hero = () => {
     </section>
   );
 };
-{/* Mouse Scroll Indicator */}
-<div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center animate-fade-in">
-  <div className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-1">
-    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+{/* Scroll Indicator */}
+<div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
+  <div className="w-7 h-12 border-2 border-orange-500 rounded-full flex justify-center items-start p-1">
+    <div className="w-1.5 h-3 bg-orange-500 rounded-full animate-pulse"></div>
   </div>
-  <p className="text-sm text-muted-foreground mt-2 animate-pulse">Scroll Down</p>
 </div>
+
 
 export default Hero;
