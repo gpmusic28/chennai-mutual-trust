@@ -15,7 +15,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path) => location.pathname === path;
 
   return (
     <header
@@ -27,21 +27,31 @@ const Header = () => {
     >
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={shreeLogo} alt="Shree Mutual Fund Services" className="h-12 w-14" />
+          {/* Logo and Title */}
+          <Link to="/" className="flex items-center gap-4">
+            <img
+              src={shreeLogo}
+              alt="Shree Mutual Fund Services"
+              className="h-16 w-20" // increased size
+            />
             <div>
-              <h1 className="text-xl font-bold text-foreground leading-tight">
+              <h1 className="text-2xl font-bold text-foreground leading-tight">
                 Shree Mutual Fund Services
               </h1>
-              <p className="text-xs text-muted-foreground">Chennai's Most Trusted</p>
+              <p className="text-sm text-muted-foreground">
+                Chennai's Most Trusted
+              </p>
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-6">
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center gap-8">
             <Link
               to="/"
               className={`text-sm font-medium transition-colors ${
-                isActive("/") ? "text-primary" : "text-foreground hover:text-primary"
+                isActive("/")
+                  ? "text-primary"
+                  : "text-foreground hover:text-primary"
               }`}
             >
               Home
@@ -49,7 +59,9 @@ const Header = () => {
             <Link
               to="/about"
               className={`text-sm font-medium transition-colors ${
-                isActive("/about") ? "text-primary" : "text-foreground hover:text-primary"
+                isActive("/about")
+                  ? "text-primary"
+                  : "text-foreground hover:text-primary"
               }`}
             >
               About Us
@@ -57,18 +69,12 @@ const Header = () => {
             <Link
               to="/calculators"
               className={`text-sm font-medium transition-colors ${
-                isActive("/calculators") ? "text-primary" : "text-foreground hover:text-primary"
+                isActive("/calculators")
+                  ? "text-primary"
+                  : "text-foreground hover:text-primary"
               }`}
             >
               Calculators
-            </Link>
-            <Link
-              to="/blog"
-              className={`text-sm font-medium transition-colors ${
-                isActive("/blog") ? "text-primary" : "text-foreground hover:text-primary"
-              }`}
-            >
-              Blog
             </Link>
             <Link to="/contact">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow">
