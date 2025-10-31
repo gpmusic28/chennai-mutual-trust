@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calculator, TrendingUp, Target, GraduationCap, Armchair, Heart, Diamond } from "lucide-react";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
 const Calculators = () => {
   // SIP Calculator State
@@ -275,6 +276,35 @@ const Calculators = () => {
 
                     <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-8 space-y-6">
                       <h3 className="text-2xl font-bold mb-6">Investment Summary</h3>
+                      
+                      {/* Donut Chart */}
+                      <div className="h-64 mb-6">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <PieChart>
+                            <Pie
+                              data={[
+                                { name: "Invested amount", value: sipResult.invested },
+                                { name: "Est. returns", value: sipResult.returns }
+                              ]}
+                              cx="50%"
+                              cy="50%"
+                              innerRadius={60}
+                              outerRadius={90}
+                              paddingAngle={2}
+                              dataKey="value"
+                            >
+                              <Cell fill="hsl(var(--primary) / 0.3)" />
+                              <Cell fill="hsl(var(--primary))" />
+                            </Pie>
+                            <Legend 
+                              verticalAlign="top" 
+                              height={36}
+                              formatter={(value) => <span className="text-sm">{value}</span>}
+                            />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </div>
+
                       <div className="space-y-4">
                         <div className="flex justify-between items-center pb-4 border-b border-border">
                           <span className="text-muted-foreground">Total Investment</span>
@@ -347,6 +377,35 @@ const Calculators = () => {
 
                     <div className="bg-gradient-to-br from-accent/5 to-primary/5 rounded-2xl p-8 space-y-6">
                       <h3 className="text-2xl font-bold mb-6">Investment Summary</h3>
+                      
+                      {/* Donut Chart */}
+                      <div className="h-64 mb-6">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <PieChart>
+                            <Pie
+                              data={[
+                                { name: "Invested amount", value: lumpResult.invested },
+                                { name: "Est. returns", value: lumpResult.returns }
+                              ]}
+                              cx="50%"
+                              cy="50%"
+                              innerRadius={60}
+                              outerRadius={90}
+                              paddingAngle={2}
+                              dataKey="value"
+                            >
+                              <Cell fill="hsl(var(--primary) / 0.3)" />
+                              <Cell fill="hsl(var(--primary))" />
+                            </Pie>
+                            <Legend 
+                              verticalAlign="top" 
+                              height={36}
+                              formatter={(value) => <span className="text-sm">{value}</span>}
+                            />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </div>
+
                       <div className="space-y-4">
                         <div className="flex justify-between items-center pb-4 border-b border-border">
                           <span className="text-muted-foreground">Total Investment</span>
